@@ -12,9 +12,16 @@ public class MoodAnalyserTestCases {
     }
 
     @Test
-    public void givenMessage_WhenContainsSad_ThenReturnSad() {
+    public void givenMessage_WhenValidSad_ThenReturnSad() {
         MoodAnalyser moodanalyser = new MoodAnalyser();
         String mood = moodanalyser.analyseMood("I am in Sad Mood");
         Assert.assertEquals("SAD", mood);
+    }
+
+    @Test
+    public void givenMessage_WhenInvalidSad_ThenReturnSad() {
+        MoodAnalyser moodanalyser = new MoodAnalyser();
+        String mood = moodanalyser.analyseMood("I am in Any Mood");
+        Assert.assertNotEquals("SAD", mood);
     }
 }
