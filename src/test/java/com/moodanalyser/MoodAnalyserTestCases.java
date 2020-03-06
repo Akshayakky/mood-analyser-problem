@@ -25,6 +25,7 @@ public class MoodAnalyserTestCases {
         Assert.assertNotEquals("SAD", mood);
     }
 
+    //HANDLING NULL MOOD
     @Test
     public void givenMessage_WhenInvalidMood_ThenReturnErrorMessage() {
         MoodAnalyser moodanalyser = new MoodAnalyser();
