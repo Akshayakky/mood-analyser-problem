@@ -24,4 +24,11 @@ public class MoodAnalyserTestCases {
         String mood = moodanalyser.analyseMood();
         Assert.assertNotEquals("SAD", mood);
     }
+
+    @Test
+    public void givenMessage_WhenInvalidMood_ThenReturnErrorMessage() {
+        MoodAnalyser moodanalyser = new MoodAnalyser();
+        String mood = moodanalyser.analyseMood();
+        Assert.assertNotEquals("SAD", mood);
+    }
 }
