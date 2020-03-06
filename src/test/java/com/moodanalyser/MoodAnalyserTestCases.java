@@ -6,22 +6,22 @@ import org.junit.Test;
 public class MoodAnalyserTestCases {
     @Test
     public void givenMessage_WhenSad_ThenReturnSad() {
-        MoodAnalyser moodanalyser = new MoodAnalyser();
-        String mood = moodanalyser.analyseMood("Sad");
+        MoodAnalyser moodanalyser = new MoodAnalyser("Sad");
+        String mood = moodanalyser.analyseMood();
         Assert.assertEquals("SAD", mood);
     }
 
     @Test
     public void givenMessage_WhenValidSad_ThenReturnSad() {
-        MoodAnalyser moodanalyser = new MoodAnalyser();
-        String mood = moodanalyser.analyseMood("I am in Sad Mood");
+        MoodAnalyser moodanalyser = new MoodAnalyser("I am in Sad Mood");
+        String mood = moodanalyser.analyseMood();
         Assert.assertEquals("SAD", mood);
     }
 
     @Test
     public void givenMessage_WhenInvalidSad_ThenReturnSad() {
-        MoodAnalyser moodanalyser = new MoodAnalyser();
-        String mood = moodanalyser.analyseMood("I am in Any Mood");
+        MoodAnalyser moodanalyser = new MoodAnalyser("I am in Any Mood");
+        String mood = moodanalyser.analyseMood();
         Assert.assertNotEquals("SAD", mood);
     }
 }
