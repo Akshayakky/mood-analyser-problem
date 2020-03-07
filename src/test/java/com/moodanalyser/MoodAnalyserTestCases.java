@@ -11,6 +11,7 @@ public class MoodAnalyserTestCases {
         Assert.assertEquals("SAD", mood);
     }
 
+    //WHEN MESSAGE CONTAINS SAD THEN RETURN EXPECTED : SAD
     @Test
     public void givenMessage_WhenValidSad_ThenReturnSad() {
         MoodAnalyser moodanalyser = new MoodAnalyser("I am in Sad Mood");
@@ -18,6 +19,7 @@ public class MoodAnalyserTestCases {
         Assert.assertEquals("SAD", mood);
     }
 
+    //WHEN MESSAGE DOES NOT CONTAIN SAD THEN RETURN EXPECTED : HAPPY
     @Test
     public void givenMessage_WhenInvalidSad_ThenReturnSad() {
         MoodAnalyser moodanalyser = new MoodAnalyser("I am in Any Mood");
@@ -25,8 +27,9 @@ public class MoodAnalyserTestCases {
         Assert.assertNotEquals("SAD", mood);
     }
 
+    //HANDLING NULL MOOD : RETURN HAPPY WHEN MESSAGE IS NULL
     @Test
-    public void givenMessage_WhenInvalidMood_ThenReturnErrorMessage() {
+    public void givenMessage_WhenInvalidMood_ThenReturnHappy() {
         MoodAnalyser moodanalyser = new MoodAnalyser();
         String mood = moodanalyser.analyseMood();
         Assert.assertNotEquals("SAD", mood);
