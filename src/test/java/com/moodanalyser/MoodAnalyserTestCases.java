@@ -39,6 +39,7 @@ public class MoodAnalyserTestCases {
         Assert.assertNotEquals("SAD", mood);
     }
 
+    //Test Case 3.1
     @Test
     public void givenMessage_WhenNullMessage_ShouldThrowException() {
         MoodAnalyser moodanalyser = new MoodAnalyser();
@@ -50,6 +51,7 @@ public class MoodAnalyserTestCases {
         }
     }
 
+    //Test Case 3.2
     @Test
     public void givenMessage_WhenEmptyMessage_ShouldThrowException() {
         MoodAnalyser moodanalyser = new MoodAnalyser("");
