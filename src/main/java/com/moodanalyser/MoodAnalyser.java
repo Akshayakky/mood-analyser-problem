@@ -16,15 +16,17 @@ public class MoodAnalyser {
         System.out.println("Welcome To Mood Analyser Problem");
     }
 
-    public String analyseMood() {
+    public String analyseMood() throws MoodAnalysisException {
         try {
+            if (message.length() == 0)
+                throw new MoodAnalysisException(MoodAnalysisException.ExceptionType.ENTERED_EMPTY, "Empty Mood. Please enter proper mood");
+
             if (message.contains("Sad"))
                 return "SAD";
             else
                 return "HAPPY";
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
-            return "HAPPY";
+        } catch (NullPointerException e) {
+            throw new MoodAnalysisException(MoodAnalysisException.ExceptionType.ENTERED_NULL, "Null Mood. Please enter proper mood");
         }
     }
 }
