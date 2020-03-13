@@ -7,11 +7,9 @@ public class MoodAnalyserFactory {
 
     public static Constructor<?> getConstructor(String className, Class<?>... param) throws MoodAnalysisException {
         try {
-            System.out.println(className);
             Class<?> moodAnalyserClass = Class.forName(className);
             return moodAnalyserClass.getConstructor(param);
         } catch (ClassNotFoundException e) {
-            System.out.println("class not found");
             throw new MoodAnalysisException(MoodAnalysisException.ExceptionType.NO_SUCH_CLASS, e.getMessage());
         } catch (NoSuchMethodException e) {
             throw new MoodAnalysisException(MoodAnalysisException.ExceptionType.NO_SUCH_METHOD, e.getMessage());

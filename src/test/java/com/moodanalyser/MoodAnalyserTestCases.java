@@ -66,32 +66,35 @@ public class MoodAnalyserTestCases {
         Assert.assertEquals(MoodAnalysisException.ExceptionType.ENTERED_EMPTY, exception);
     }
 
+    //Test Case 4.1
     @Test
     public void givenMoodAnalyserClass_WhenProper_ShouldReturnObject() {
         Object myObject = null;
         try {
-            Constructor<?> constructor = MoodAnalyserFactory.getConstructor("com.moodanalyser.MoodAnalyser", String.class);
-            myObject = MoodAnalyserFactory.createMoodAnalyser(constructor, "I am in Happy Mood");
+            Constructor<?> constructor = MoodAnalyserFactory.getConstructor("com.moodanalyser.MoodAnalyser");
+            myObject = MoodAnalyserFactory.createMoodAnalyser(constructor);
         } catch (MoodAnalysisException e) {
             exception = e.type;
         }
-        Assert.assertEquals(new MoodAnalyser("I am in Happy Mood"), myObject);
+        Assert.assertEquals(new MoodAnalyser(), myObject);
     }
 
+    //Test Case 4.2
     @Test
     public void givenMoodAnalyserClass_WhenClassImproper_ShouldThrowException() {
         try {
-            Constructor<?> constructor = MoodAnalyserFactory.getConstructor("com.moodanalyser.InvalidClassName", String.class);
+            Constructor<?> constructor = MoodAnalyserFactory.getConstructor("com.moodanalyser.InvalidClassName");
         } catch (MoodAnalysisException e) {
             exception = e.type;
         }
         Assert.assertEquals(MoodAnalysisException.ExceptionType.NO_SUCH_CLASS, exception);
     }
 
+    //Test Case 4.3
     @Test
     public void givenMoodAnalyserClass_WhenConstructorImproper_ShouldThrowException() {
         try {
-            Constructor<?> constructor = MoodAnalyserFactory.getConstructor("com.moodanalyser.MoodAnalyser", String.class, Integer.class);
+            Constructor<?> constructor = MoodAnalyserFactory.getConstructor("com.moodanalyser.MoodAnalyser", Integer.class);
         } catch (MoodAnalysisException e) {
             exception = e.type;
         }
