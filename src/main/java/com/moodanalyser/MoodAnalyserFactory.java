@@ -39,4 +39,16 @@ public class MoodAnalyserFactory {
             throw new MoodAnalysisException(MoodAnalysisException.ExceptionType.METHOD_INVOCATION_ISSUE, e.getMessage());
         }
     }
+
+    public static void setFieldValue(Object myObject, String fieldName, String fieldValue) throws MoodAnalysisException {
+        try {
+            if (fieldValue == null)
+                throw new MoodAnalysisException(MoodAnalysisException.ExceptionType.ENTERED_NULL, "Field value set to null");
+            MoodAnalyser.class.getDeclaredField(fieldName).set(myObject, fieldValue);
+        } catch (IllegalAccessException e) {
+            throw new MoodAnalysisException(MoodAnalysisException.ExceptionType.NO_SUCH_FIELD, e.getMessage());
+        } catch (NoSuchFieldException e) {
+            throw new MoodAnalysisException(MoodAnalysisException.ExceptionType.NO_SUCH_FIELD, e.getMessage());
+        }
+    }
 }

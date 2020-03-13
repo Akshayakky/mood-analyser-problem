@@ -146,21 +146,61 @@ public class MoodAnalyserTestCases {
             Object mood = MoodAnalyserFactory.invokeMethod(myObject, "analyseMood");
             Assert.assertEquals("HAPPY", mood);
         } catch (MoodAnalysisException e) {
-            exception = e.type;
+            e.printStackTrace();
         }
     }
 
     //Test Case 6.2
     @Test
     public void givenAnalyseMoodMethod_WhenImproper_ShouldReturnObject() {
-        Object myObject = null;
         try {
             Constructor<?> constructor = MoodAnalyserFactory.getConstructor("com.moodanalyser.MoodAnalyser", String.class);
-            myObject = MoodAnalyserFactory.createMoodAnalyser(constructor, "I am in happy mood");
-            Object mood = MoodAnalyserFactory.invokeMethod(myObject, "invalidMethod");
+            Object myObject = MoodAnalyserFactory.createMoodAnalyser(constructor, "I am in happy mood");
+            Object mood = MoodAnalyserFactory.invokeMethod(myObject, "analyseMoo");
         } catch (MoodAnalysisException e) {
             exception = e.type;
         }
         Assert.assertEquals(MoodAnalysisException.ExceptionType.NO_SUCH_METHOD, exception);
+    }
+
+    //Test Case 7.1
+    @Test
+    public void givenHappyMessageDynamically_WhenProper_ShouldReturnHappy() {
+        try {
+            Constructor<?> constructor = MoodAnalyserFactory.getConstructor("com.moodanalyser.MoodAnalyser");
+            Object myObject = MoodAnalyserFactory.createMoodAnalyser(constructor);
+            MoodAnalyserFactory.setFieldValue(myObject, "message", "happy");
+            Object mood = MoodAnalyserFactory.invokeMethod(myObject, "analyseMood");
+            Assert.assertEquals("HAPPY", mood);
+        } catch (MoodAnalysisException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Test
+    public void givenHappyMessageDynamically_WhenImproperField_ShouldThrowException() {
+        try {
+            Constructor<?> constructor = MoodAnalyserFactory.getConstructor("com.moodanalyser.MoodAnalyser");
+            Object myObject = MoodAnalyserFactory.createMoodAnalyser(constructor);
+            MoodAnalyserFactory.setFieldValue(myObject, "invalidField", "happy");
+            Object mood = MoodAnalyserFactory.invokeMethod(myObject, "analyseMood");
+        } catch (MoodAnalysisException e) {
+            exception = e.type;
+        }
+        Assert.assertEquals(MoodAnalysisException.ExceptionType.NO_SUCH_FIELD, exception);
+    }
+
+
+    @Test
+    public void givenHappyMessageDynamically_WhenFieldNull_ShouldThrowException() {
+        try {
+            Constructor<?> constructor = MoodAnalyserFactory.getConstructor("com.moodanalyser.MoodAnalyser");
+            Object myObject = MoodAnalyserFactory.createMoodAnalyser(constructor);
+            MoodAnalyserFactory.setFieldValue(myObject, "message", null);
+            Object mood = MoodAnalyserFactory.invokeMethod(myObject, "analyseMood");
+        } catch (MoodAnalysisException e) {
+            exception = e.type;
+        }
+        Assert.assertEquals(MoodAnalysisException.ExceptionType.ENTERED_NULL, exception);
     }
 }
