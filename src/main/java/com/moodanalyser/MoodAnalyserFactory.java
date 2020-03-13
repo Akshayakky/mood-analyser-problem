@@ -28,4 +28,17 @@ public class MoodAnalyserFactory {
         }
         return null;
     }
+
+    public static Object invokeMethod(Object myObject, String methodName) throws MoodAnalysisException {
+        try {
+            return MoodAnalyser.class.getMethod(methodName).invoke(myObject);
+        } catch (NoSuchMethodException e) {
+            throw new MoodAnalysisException(MoodAnalysisException.ExceptionType.NO_SUCH_METHOD, e.getMessage());
+        } catch (IllegalAccessException e) {
+            e.printStackTrace();
+        } catch (InvocationTargetException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
 }

@@ -107,7 +107,7 @@ public class MoodAnalyserTestCases {
         Object myObject = null;
         try {
             Constructor<?> constructor = MoodAnalyserFactory.getConstructor("com.moodanalyser.MoodAnalyser", String.class);
-            myObject = MoodAnalyserFactory.createMoodAnalyser(constructor,"I am in happy mood");
+            myObject = MoodAnalyserFactory.createMoodAnalyser(constructor, "I am in happy mood");
         } catch (MoodAnalysisException e) {
             exception = e.type;
         }
@@ -130,6 +130,34 @@ public class MoodAnalyserTestCases {
     public void givenMoodAnalyserClassWithParameterConstructor_WhenConstructorImproper_ShouldThrowException() {
         try {
             Constructor<?> constructor = MoodAnalyserFactory.getConstructor("com.moodanalyser.MoodAnalyser", String.class, Integer.class);
+        } catch (MoodAnalysisException e) {
+            exception = e.type;
+        }
+        Assert.assertEquals(MoodAnalysisException.ExceptionType.NO_SUCH_METHOD, exception);
+    }
+
+    //Test Case 6.1
+    @Test
+    public void givenAnalyseMoodMethod_WhenProper_ShouldReturnObject() {
+        Object myObject = null;
+        try {
+            Constructor<?> constructor = MoodAnalyserFactory.getConstructor("com.moodanalyser.MoodAnalyser", String.class);
+            myObject = MoodAnalyserFactory.createMoodAnalyser(constructor, "I am in happy mood");
+            Object mood = MoodAnalyserFactory.invokeMethod(myObject, "analyseMood");
+            Assert.assertEquals("HAPPY", mood);
+        } catch (MoodAnalysisException e) {
+            exception = e.type;
+        }
+    }
+
+    //Test Case 6.2
+    @Test
+    public void givenAnalyseMoodMethod_WhenImproper_ShouldReturnObject() {
+        Object myObject = null;
+        try {
+            Constructor<?> constructor = MoodAnalyserFactory.getConstructor("com.moodanalyser.MoodAnalyser", String.class);
+            myObject = MoodAnalyserFactory.createMoodAnalyser(constructor, "I am in happy mood");
+            Object mood = MoodAnalyserFactory.invokeMethod(myObject, "invalidMethod");
         } catch (MoodAnalysisException e) {
             exception = e.type;
         }
