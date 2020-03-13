@@ -177,6 +177,7 @@ public class MoodAnalyserTestCases {
         }
     }
 
+    //Test Case 7.2
     @Test
     public void givenHappyMessageDynamically_WhenImproperField_ShouldThrowException() {
         try {
@@ -190,7 +191,7 @@ public class MoodAnalyserTestCases {
         Assert.assertEquals(MoodAnalysisException.ExceptionType.NO_SUCH_FIELD, exception);
     }
 
-
+    //Test Case 7.3
     @Test
     public void givenHappyMessageDynamically_WhenFieldNull_ShouldThrowException() {
         try {
