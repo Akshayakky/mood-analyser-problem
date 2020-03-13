@@ -100,4 +100,39 @@ public class MoodAnalyserTestCases {
         }
         Assert.assertEquals(MoodAnalysisException.ExceptionType.NO_SUCH_METHOD, exception);
     }
+
+    //Test Case 5.1
+    @Test
+    public void givenMoodAnalyserClassWithParameterConstructor_WhenProper_ShouldReturnObject() {
+        Object myObject = null;
+        try {
+            Constructor<?> constructor = MoodAnalyserFactory.getConstructor("com.moodanalyser.MoodAnalyser", String.class);
+            myObject = MoodAnalyserFactory.createMoodAnalyser(constructor,"I am in happy mood");
+        } catch (MoodAnalysisException e) {
+            exception = e.type;
+        }
+        Assert.assertEquals(new MoodAnalyser("I am in happy mood"), myObject);
+    }
+
+    //Test Case 5.2
+    @Test
+    public void givenMoodAnalyserClassWithParameterConstructor_WhenClassImproper_ShouldThrowException() {
+        try {
+            Constructor<?> constructor = MoodAnalyserFactory.getConstructor("com.moodanalyser.InvalidClassName", String.class);
+        } catch (MoodAnalysisException e) {
+            exception = e.type;
+        }
+        Assert.assertEquals(MoodAnalysisException.ExceptionType.NO_SUCH_CLASS, exception);
+    }
+
+    //Test Case 5.3
+    @Test
+    public void givenMoodAnalyserClassWithParameterConstructor_WhenConstructorImproper_ShouldThrowException() {
+        try {
+            Constructor<?> constructor = MoodAnalyserFactory.getConstructor("com.moodanalyser.MoodAnalyser", String.class, Integer.class);
+        } catch (MoodAnalysisException e) {
+            exception = e.type;
+        }
+        Assert.assertEquals(MoodAnalysisException.ExceptionType.NO_SUCH_METHOD, exception);
+    }
 }
