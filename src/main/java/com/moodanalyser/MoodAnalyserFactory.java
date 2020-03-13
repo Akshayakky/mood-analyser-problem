@@ -16,17 +16,16 @@ public class MoodAnalyserFactory {
         }
     }
 
-    public static Object createMoodAnalyser(Constructor<?> constructor, Object... message) {
+    public static Object createMoodAnalyser(Constructor<?> constructor, Object... message) throws MoodAnalysisException {
         try {
             return constructor.newInstance(message);
         } catch (IllegalAccessException e) {
-            e.printStackTrace();
+            throw new MoodAnalysisException(MoodAnalysisException.ExceptionType.NO_ACCESS, e.getMessage());
         } catch (InstantiationException e) {
-            e.printStackTrace();
+            throw new MoodAnalysisException(MoodAnalysisException.ExceptionType.OBJECT_CREATION_ISSUE, e.getMessage());
         } catch (InvocationTargetException e) {
-            e.printStackTrace();
+            throw new MoodAnalysisException(MoodAnalysisException.ExceptionType.METHOD_INVOCATION_ISSUE, e.getMessage());
         }
-        return null;
     }
 
     public static Object invokeMethod(Object myObject, String methodName) throws MoodAnalysisException {
@@ -35,10 +34,9 @@ public class MoodAnalyserFactory {
         } catch (NoSuchMethodException e) {
             throw new MoodAnalysisException(MoodAnalysisException.ExceptionType.NO_SUCH_METHOD, e.getMessage());
         } catch (IllegalAccessException e) {
-            e.printStackTrace();
+            throw new MoodAnalysisException(MoodAnalysisException.ExceptionType.NO_ACCESS, e.getMessage());
         } catch (InvocationTargetException e) {
-            e.printStackTrace();
+            throw new MoodAnalysisException(MoodAnalysisException.ExceptionType.METHOD_INVOCATION_ISSUE, e.getMessage());
         }
-        return null;
     }
 }
